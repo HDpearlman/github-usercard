@@ -3,6 +3,25 @@
            https://api.github.com/users/<your name>
 */
 
+
+
+axios.get('https://api.github.com/users/HDPearlman')
+.then(result => {
+  console.log(result)
+  console.log(result.data.avatar_url)
+  console.log(result)
+
+ 
+ 
+  console.log(githubCard(result))
+  const cardContainer = document.querySelector('.cards')
+  cardContainer.appendChild(githubCard(result))
+  
+  
+})
+
+
+
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -24,7 +43,24 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell]']
+
+followersArray.forEach(name =>{
+  axios.get(`https://api.github.com/users/${name}`)
+.then(result => {
+  console.log(result)
+  console.log(result.data.avatar_url)
+  console.log(result)
+
+ 
+ 
+  console.log(githubCard(result))
+  const cardContainer = document.querySelector('.cards')
+  cardContainer.appendChild(githubCard(result))
+  
+  
+})
+})
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -45,6 +81,64 @@ const followersArray = [];
 </div>
 
 */
+
+const githubCard = (object) =>{
+
+  const divCard = document.createElement('div')
+  divCard.classList.add('card')
+
+    const userImg = document.createElement('img')
+    userImg.src = object.data.avatar_url
+    divCard.appendChild(userImg)
+
+    const divCardInfo = document.createElement('div')
+    divCardInfo.classList.add('card-info')
+    divCard.appendChild(divCardInfo)
+
+      const h3Name = document.createElement('h3')
+      h3Name.classList.add('name')
+      h3Name.textContent = object.data.name
+      divCardInfo.appendChild(h3Name)
+
+      const pUsername = document.createElement('p')
+      pUsername.classList.add('username')
+      pUsername.textContent = object.data.login
+      divCardInfo.appendChild(pUsername)
+
+      const pLocation = document.createElement('p')
+      pLocation.textContent = `Location: ${object.data.location}`
+
+      const pProfile = document.createElement('p')
+      const profileLink = document.createElement('a')
+      profileLink.href = object.data.html_url
+      profileLink.textContent = object.data.html_url
+      pProfile.appendChild(profileLink)
+
+      const pFollowers = document.createElement('p')
+      pFollowers.textContent = `Followers: ${object.data.followers}`
+      
+      const pFollowing = document.createElement('p')
+      pFollowing.textContent = `Following: ${object.data.following}`
+
+      const pBio = document.createElement('p')
+      pBio.textContent = `Bio: ${object.data.bio}`
+
+      divCardInfo.append(pLocation, pProfile, pFollowers, pFollowing, pBio)
+
+
+
+
+
+
+
+  return divCard
+}
+
+
+
+
+
+
 
 /* List of LS Instructors Github username's: 
   tetondan
