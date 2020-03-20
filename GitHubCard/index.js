@@ -49,6 +49,49 @@ const followersArray = [];
 
 */
 
+const githubCard = (object) =>{
+
+  const divCard = document.createElement('div')
+  divCard.classList.add('card')
+
+    const userImg = document.createElement('img')
+    userImg.src = object.data.avatar_url
+    divCard.appendChild(userImg)
+
+    const divCardInfo = document.createElement('div')
+    divCardInfo.classList.add('card-info')
+    divCard.appendChild(divCardInfo)
+
+      const h3Name = document.createElement('h3')
+      h3Name.classList.add('name')
+      divCardInfo.appendChild(h3Name)
+
+      const pUsername = document.createElement('p')
+      pUsername.classList.add('username')
+      divCardInfo.appendChild(pUsername)
+
+      const pLocation = document.createElement('p')
+
+      const pProfile = document.createElement('p')
+
+      const pFollowers = document.createElement('p')
+      
+      const pFollowing = document.createElement('p')
+
+      const pBio = document.createElement('p')
+
+      divCardInfo.append(pLocation, pProfile, pFollowers, pFollowing, pBio)
+
+
+
+
+
+
+
+  return divCard
+}
+
+
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
